@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  
+
   const config = new DocumentBuilder()
     .addBearerAuth()
     .setTitle('Mi Api documentation')
@@ -16,7 +16,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('documentation', app, document);
 
-
-  await app.listen(3000);
+  await app.listen(4000);
 }
 bootstrap();
