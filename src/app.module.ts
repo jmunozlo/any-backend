@@ -10,9 +10,9 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot(process.env.CNN_DB),
-    AuthModule,
-    UserModule,
+    // MongooseModule.forRoot(process.env.CNN_DB),
+    // AuthModule,
+    // UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
