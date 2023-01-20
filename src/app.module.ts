@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
     MongooseModule.forRoot(process.env.CNN_DB),
     AuthModule,
     UserModule,
-    ],
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
