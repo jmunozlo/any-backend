@@ -1,17 +1,31 @@
-FROM alpine:3.15
+FROM node:16-alpine as builder
 
-RUN apk add --update yarn 
+ENV NODE_ENV build
 
-WORKDIR /app
+USER node
+WORKDIR /home/node
 
-COPY package.json .
+COPY package*.json ./
+RUN npm ci
 
-RUN yarn 
+COPY --chown=node:node . .
+RUN npm run build \
+    && npm prune --production
 
-COPY . .
+# ---
 
-RUN yarn build
+FROM node:16-alpine
+
+ENV NODE_ENV production
+ENV JWT_SECRET qwerty@21
+ENV CNN_DB mongodb+srv://genericDB:yI48zySqxMOrnjRt@cluster0.70yz3.mongodb.net/genericDB
+USER node
+WORKDIR /home/node
+
+COPY --from=builder --chown=node:node /home/node/package*.json ./
+COPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/
+COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
 
 EXPOSE 4000 
+CMD ["node", "dist/main.js"]
 
-CMD ["yarn", "start"]

@@ -9,4 +9,9 @@ export class AppController {
   getMain(@Res() res) {
     return res.status(HttpStatus.OK).json(this.appService.getMain());
   }
+
+  @Get()
+  getHello(): object {
+    return this.appService.getHello();
+  }
 }

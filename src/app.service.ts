@@ -10,4 +10,7 @@ export class AppService {
       author: 'fconcha & jmunozlo',
     };
   }
+  getHello(): object {
+    return { message: 'Hello from API V2' };
+  }
 }
