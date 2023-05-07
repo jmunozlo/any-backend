@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { User, UserSchema } from 'src/user/schema/user.schema';
+
 import { AuthController } from './auth.controller';
-import { MongooseModule } from '@nestjs/mongoose';
-import { User,UserSchema } from 'src/user/schema/user.schema';
+import { AuthService } from './auth.service';
+import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
-
-import { ConfigModule } from '@nestjs/config';
+import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
   
@@ -19,7 +19,7 @@ import { ConfigModule } from '@nestjs/config';
       },
     ]),
     JwtModule.register({
-      secret: process.env.JWT_SECRET,
+      secret: process.env.JWT_SECRET ||'qwerty@21',
       signOptions: { expiresIn: '24h' },
     }),
   ],

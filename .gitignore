@@ -34,4 +34,6 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+postgres_data
 .env
+mongodb_credencial
